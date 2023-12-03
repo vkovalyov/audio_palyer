@@ -1,7 +1,11 @@
 
+/// Элемент связаного списка
 class LinkedListItem<T> {
+  /// значение ноды
   T value;
+  /// ссылка на след ноду
   LinkedListItem<T>? next;
+  /// ссылка на пред ноду
   LinkedListItem<T>? prev;
 
   LinkedListItem({
@@ -23,7 +27,7 @@ class LinkedListItem<T> {
         other.next == next;
   }
 
-
+  /// хешкод объекта, влияет на сравниние [==]
   @override
   int get hashCode => Object.hash(value, prev, next);
 }

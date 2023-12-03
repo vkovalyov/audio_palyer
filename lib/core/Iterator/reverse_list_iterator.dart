@@ -1,5 +1,6 @@
 import 'package:audio_player/core/linked_list/linked_list_item.dart';
 
+/// Реверсивный итератор для связаного списка
 class ReverseLinkedListIterator<E> implements Iterator<LinkedListItem<E>> {
   final LinkedListItem<E>? _node;
 
@@ -20,7 +21,7 @@ class ReverseLinkedListIterator<E> implements Iterator<LinkedListItem<E>> {
       _currentNode = current;
       _firstPass = false;
     } else {
-      _currentNode = _currentNode?.next;
+      _currentNode = _currentNode?.prev;
     }
 
     return _currentNode != null;

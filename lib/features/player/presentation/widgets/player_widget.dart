@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:audio_player/core/models/composition.dart';
 import 'package:audio_player/core/models/play_list.dart';
 import 'package:audio_player/core/utils.dart';
-import 'package:audio_player/core/utils/time_utils.dart';
 import 'package:audio_player/features/player/presentation/play_list_provider.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +42,6 @@ class _PlayerWidget extends ConsumerState<PlayerWidget> {
 
     super.initState();
   }
-
 
   Future<void> _pause() async {
     await player.pause();
@@ -88,7 +85,7 @@ class _PlayerWidget extends ConsumerState<PlayerWidget> {
     }
   }
 
- void startCurrentPlayer() async {
+  void startCurrentPlayer() async {
     final state = ref.read(playerNotifierProvider).player;
     if (state != null && state.current != null) {
       await player.play(urlSourceFromBytes(state.current!.value.bytes));
@@ -97,7 +94,7 @@ class _PlayerWidget extends ConsumerState<PlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-     ref.watch(playerNotifierProvider).player;
+    ref.watch(playerNotifierProvider).player;
 
     final int currentMin =
         Duration(seconds: _position?.inSeconds ?? 0).inMinutes.remainder(60);
@@ -126,7 +123,6 @@ class _PlayerWidget extends ConsumerState<PlayerWidget> {
                 children: [
                   IconButton(
                       onPressed: () async {
-                        // _play();
                         await player.play(
                             urlSourceFromBytes(state.current!.value.bytes));
                       },
@@ -175,12 +171,12 @@ class _PlayerWidget extends ConsumerState<PlayerWidget> {
             ]));
   }
 
- void nextTrack() {
+  void nextTrack() {
     ref.read(playerNotifierProvider.notifier).nextTrack();
     startCurrentPlayer();
   }
 
- void previousTrack() {
+  void previousTrack() {
     ref.read(playerNotifierProvider.notifier).previousTrack();
     startCurrentPlayer();
   }

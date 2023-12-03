@@ -1,5 +1,6 @@
 import 'package:audio_player/core/linked_list/linked_list_item.dart';
 
+/// Итератор для связаного списка
 class LinkedListIterator<E> implements Iterator<LinkedListItem<E>> {
   final LinkedListItem<E>? _node;
 

@@ -33,6 +33,34 @@ class LinkedList<E> extends Iterable<LinkedListItem<E>> {
     return null;
   }
 
+
+  LinkedListItem<E>? insert(LinkedListItem<E> previous, E value) {
+    if (tail == previous) {
+      append(value);
+      return tail!;
+    }
+
+    if (head == previous) {
+      appendLeft(value);
+      return head;
+    }
+
+    if (contains(previous)) {
+      final newNode = LinkedListItem(
+        value: value,
+        next: previous.next,
+        prev: previous,
+      );
+
+      previous.next = newNode;
+
+      _increment();
+      return newNode;
+    } else {
+      return null;
+    }
+  }
+
   E? _removeRight() {
     if (tail != null) {
       final result = tail?.value;
@@ -56,10 +84,14 @@ class LinkedList<E> extends Iterable<LinkedListItem<E>> {
       _decrement();
       return _removeRight();
     } else {
-      node.prev?.next = node.next;
-      node.next?.prev = node.prev;
-      _decrement();
-      return node.value;
+      if (contains(node)) {
+        node.prev?.next = node.next;
+        node.next?.prev = node.prev;
+        _decrement();
+        return node.value;
+      } else {
+        return null;
+      }
     }
   }
 
